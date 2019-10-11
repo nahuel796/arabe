@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>La Arabe</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/bg-pattern.css">
+</head>
+<body>
+
+<div class="main-content" style="margin-top: 10px">
+    <div class="buttons-config">
+        <img src="img/homepage.svg" onclick="RouteMain()">
+        <br><br>
+        <img src="img/order.svg" onclick="RouteOrders()">
+        <br><br>
+        <img src="img/bars.svg" onclick="RouteMoney()">
+        <br><br>
+        <img src="img/cog.svg" onclick="RouteProducts()">
+        <br><br>
+        <img src="img/account.png" onclick="RouteCaja()">
+    </div>
+    <section id="main">
+        <div class="row">
+            <div class="col col-sm-2">
+                <ul class="nav nav-tabs nav-stacked text-center nav-left" role="tablist">
+                    <li onclick="viewHome1()"><a href="#"><img src="img/pizza.svg" width="70px"><br>Pizza Grande</a>
+                    </li>
+                    <li onclick="viewHome2()"><a href="#"><img src="img/pizza.svg" width="40px"><br>Pizza Mediana</a>
+                    </li>
+                    <li onclick="viewHome3()"><a href="#"><img src="img/pizza.svg" width="70px"><br>SkinnyMass
+                        Grande</a></li>
+                    <li onclick="viewHome4()"><a href="#"><img src="img/pizza.svg" width="40px"><br>SkinnyMass
+                        Mediana</a></li>
+                    <li onclick="viewHome5()"><a href="#"><img src="img/empanada.png" width="70px"><br>Empanadas</a>
+                    </li>
+                    <li onclick="viewHome6()"><a href="#"><img src="img/combo.svg" width="70px"><br>Combos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col col-sm-7">
+                <div class="row tab-content">
+                    <div id="home1"><h2 class="title-category">Pizza Grande</h2></div>
+                    <div style="display: none" id="home2"><h2 class="title-category">Pizza Mediana</h2></div>
+                    <div style="display: none" id="home3"><h2 class="title-category">SkinnyMass Grande</h2></div>
+                    <div style="display: none" id="home4"><h2 class="title-category">SkinnyMass Mediana</h2></div>
+                    <div style="display: none" id="home5"><h2 class="title-category">Empanadas</h2></div>
+                    <div style="display: none" id="home6"><h2 class="title-category">Combos</h2></div>
+                </div>
+            </div>
+            <div class="col col-sm-3">
+                <h2 class="title-category">Compra</h2>
+                <div class="col-md-12 cart" id="pushCart">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <ul class="list-inline pull-right">
+                <li>
+                    <button type="button" class="btn btn-success prev-step btn-finalizar" onclick="End()">Finalizar
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </section>
+    <section id="orders" style="display: none;">
+        <h2 class="title-category">Pedidos</h2>
+        <div id="pushTableOrders"></div>
+    </section>
+    <section id="products" style="display: none;">
+        <h2 class="title-category">Modificar Productos</h2>
+        <a class="btn btn-success apply-changes" onclick="SaveProducts()">Aplicar</a>
+        <div id="pushTableProducts">
+            <div class="col-xs-2 col-sm-2 col-md-2 section-products">
+                <a class="btn btn-success">Aplicar</a><input type="number" class="form-control">
+            </div>
+            <div class="col-xs-10 col-sm-10 col-md-10">
+                <h4>Pizza Muzzarella</h4>
+            </div>
+        </div>
+    </section>
+    <section id="money" style="display: none;">
+        <h2 class="title-category">Ventas</h2>
+        <div id="pushTableMoney"></div>
+        <div class="col-md-12 caja-box-red mt-20">
+            <h3><img src="img/graph.svg" width="50" height="50"><b> Gráfico</b></h3>
+            <div id="scroll-h-money" class="col-md-12" style="overflow-x: auto;overflow-y:hidden">
+                <div style="width: 2000px; height: 300px">
+                    <canvas id="popChart" width="900" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="caja" style="display: none;">
+        <h2 class="title-category">Caja</h2>
+        <div id="pushTableCaja"></div>
+    </section>
+</div>
+
+<script src="./renderer.js"></script>
+<script src="./node_modules/chart.js/dist/Chart.bundle.js"></script>
+<script src="./scripts.js"></script>
+
+<script>
+    (function () {
+        function scrollHorizontally(e) {
+            e = window.event || e;
+            var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+            document.getElementById('scroll-h-money').scrollLeft -= (delta * 40); // Multiplied by 40
+            e.preventDefault();
+        }
+
+        if (document.getElementById('scroll-h-money').addEventListener) {
+            // IE9, Chrome, Safari, Opera
+            document.getElementById('scroll-h-money').addEventListener("mousewheel", scrollHorizontally, false);
+            // Firefox
+            document.getElementById('scroll-h-money').addEventListener("DOMMouseScroll", scrollHorizontally, false);
+        } else {
+            // IE 6/7/8
+            document.getElementById('scroll-h-money').attachEvent("onmousewheel", scrollHorizontally);
+        }
+    })();
+</script>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+electron-packager . LaArabe --overwrite --asar=true --platform=win32 --arch=ia32
